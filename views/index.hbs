@@ -1,14 +1,11 @@
-
-
-
 <section class="hero is-primary">
     <div class="hero-body">
         <div class="container">
             <h1 class="title">
-                Aswini Lab
+                {{title}}
             </h1>
             <h2 class="subtitle">
-                Welcome to the lab
+                Welcome to the {{title}}
             </h2>
         </div>
     </div>
@@ -17,30 +14,34 @@
 <section class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-one-quarter">
-                <div class="box">
-                    <h3 class="title is-5">Widget 1</h3>
-                    <p>This is some content for Widget 1.</p>
+            
+            <a href="/reports" class="column is-one-quarter">
+                <div class="box has-background-info has-text-white has-rounded-corners">
+                    <h3 class="has-text-white title is-5"> Reports </h3>
+                    <p> Upload test reports. </p>
                 </div>
-            </div>
-            <div class="column is-one-quarter">
-                <div class="box">
-                    <h3 class="title is-5">Widget 2</h3>
-                    <p>This is some content for Widget 2.</p>
+            </a>
+
+            <a href="/booking" class="column is-one-quarter">
+                <div class="box has-background-danger has-text-white has-rounded-corners">
+                    <h3 class="has-text-white title is-5"> Field Booking </h3>
+                    <p> Blood sample collection booking. </p>
                 </div>
-            </div>
-            <div class="column is-one-quarter">
-                <div class="box">
-                    <h3 class="title is-5">Widget 3</h3>
-                    <p>This is some content for Widget 3.</p>
+            </a>
+            <a href="/appointments" class="column is-one-quarter">
+                <div class="box has-background-success has-text-white has-rounded-corners">
+                    <h3 class="has-text-white title is-5"> Appointments </h3>
+                    <p> Lab Appointments tracking. </p>
                 </div>
-            </div>
-            <div class="column is-one-quarter">
-                <div class="box">
-                    <h3 class="title is-5">Widget 4</h3>
-                    <p>This is some content for Widget 4.</p>
+            </a>
+
+            <a href="/payments" class="column is-one-quarter">
+                <div class="box has-background-primary has-text-white has-rounded-corners">
+                    <h3 class="has-text-white title is-5"> Payments </h3>
+                    <p> Manage youe payments. </p>
                 </div>
-            </div>
+            </a>
+
         </div>
     </div>
 </section>

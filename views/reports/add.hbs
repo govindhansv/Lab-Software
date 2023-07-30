@@ -1,0 +1,76 @@
+<form action="/upload/report/" method="post" enctype="multipart/form-data"  class="section">
+
+    <h1 class="title "> Upload New Report</h1>
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+            <input class="input" name="name" type="text" placeholder="Name">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Phone</label>
+        <div class="control">
+            <input class="input" name="phone" type="tel" placeholder=" Phone number">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Test Name</label>
+        <div class="control">
+            <input class="input" name="test" type="text" placeholder="Test Name">
+        </div>
+    </div>
+
+
+    <div class="field">
+        <label class="label">Test Description</label>
+        <div class="control">
+            <textarea class="textarea" name="description" placeholder="Textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Payment Status</label>
+        <div class="control">
+            <div class="select">
+                <select name="paymentstatus">
+                    <option value="done">Select dropdown</option>
+                    <option value="done"> Done </option>
+                    <option value="not-done"> To be Done </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="file has-name is-boxed">
+            <label class="file-label">
+                <input class="file-input" type="file" name="file" id="file" accept="*/*">
+                <span class="file-cta">
+                    <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                        Choose a file…
+                    </span>
+                </span>
+                <span class="file-name">
+                    Screen Shot 2017-07-29 at 15.54.25.png
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button id="submit-button" type="submit" class="button is-link">Submit</button>
+        </div>
+        <div class="control">
+            <button type="reset" class="button is-link is-light">Reset</button>
+        </div>
+        <div class="control">
+            <a href="/reports/" class="button is-link is-danger">Cancel</a>
+        </div>
+    </div>
+</form>
+
+  
