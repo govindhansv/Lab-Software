@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var db = require('../connection');
-
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
+const db = require('../connection');
 
 cloudinary.config({
     cloud_name: 'gbrozdev',
@@ -44,10 +43,21 @@ router.post("/report", upload.single("file"), async function (req, res, next) {
         console.log(fileUrl);
         let data = req.body;
         data.report = fileUrl;
-        res.render('reports/single', { data })
         console.log(data);
-        await db.get().collection('reports').insertOne(data);
-        // You can now use the fileUrl or send it back in the response as needed
+        await db.get.collection('labreports').insertOne(data).then(response => {
+            res.render('reports/single', { data })
+        })
+            .catch(err => console.log(err));
+
+        // let report = new Report(data);
+        // report.save()
+        //     .then(doc => {
+        //         res.send(doc)
+        //         console.log(doc)
+        //     })
+        //     .catch(err => console.log(err))
+
+
     } catch (err) {
         console.error("Error uploading file:", err);
         res.status(500).json({ error: "Image upload failed" });

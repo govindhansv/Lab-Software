@@ -1,22 +1,21 @@
+const { MongoClient } = require('mongodb')
 
+// Create Instance of MongoClient for mongodb
+const client = new MongoClient('mongodb+srv://govi:govi@cluster0.qmc6cnq.mongodb.net/LAB?retryWrites=true&w=majority')
 
-const mongoClient = require('mongodb').MongoClient
-const state = {
-  db: null
+// Connect to database
+module.exports.connect = function () {
+  client.connect()
+    .then(() => {
+      console.log('Connected Successfully')
+      // console.log('Exiting..')
+      // client.close();
+    })
+    .catch(error => console.log('Failed to connect', error))
 }
 
-module.exports.connect = function (done) {
-  const url = process.env.DATABASE_URL || "mongodb+srv://govi:govi@cluster0.qmc6cnq.mongodb.net/LabSoftware?retryWrites=true&w=majority"
-  const dbname = 'LabSoftware'
+module.exports.get = client.db('LAB');
 
-  mongoClient.connect(url, (err, data) => {
-    if (err) return done(err)
-    state.db = data.db(dbname)
-    done()
-  })
-}
-
-
-module.exports.get = function () {
-  return state.db
-}
+// module.exports.get = function () {
+//   return client.db('LAB');
+// }

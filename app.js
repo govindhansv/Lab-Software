@@ -9,11 +9,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const sessions = require('express-session');
-var db = require('./connection');
 const hbs = require('express-handlebars');
+var db = require('./connection');
+
 
 // try {
-//   db.connect();
+  // db.connect();
 //   console.log("Database connected to port");
 // } catch (err) {
 //   console.log("Connection Error" + err);
@@ -28,14 +29,8 @@ var uploadRouter = require('./routes/upload');
 var usersRouter = require('./routes/users');
 
 var app = express();
-try {
-  db.connect((err) => {
-  if (err) console.log("Connection Error" + err);
-  else console.log("Database connected to port")
-})
-} catch (error) {
-  console.log(error);
-}
+
+db.connect();
 
 
 // view engine setup
@@ -67,6 +62,17 @@ app.use('/', indexRouter);
 app.use('/reports', reportsRouter);
 app.use('/upload', uploadRouter);
 app.use('/users', usersRouter);
+
+
+// mongoose.set('strictQuery', true)
+// mongoose
+//   .connect(process.env.MONGO_URL, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   }).then(() => {
+//     console.log(' Database Connected to Server');
+//   })
+//     .catch((error) => console.log(`mongoose error --- > ${error} did not connect`));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
