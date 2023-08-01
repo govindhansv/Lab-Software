@@ -44,20 +44,10 @@ router.post("/report", upload.single("file"), async function (req, res, next) {
         let data = req.body;
         data.report = fileUrl;
         console.log(data);
-        await db.get.collection('labreports').insertOne(data).then(response => {
+        db.get.collection('labreports').insertOne(data).then(response => {
             res.render('reports/single', { data })
         })
             .catch(err => console.log(err));
-
-        // let report = new Report(data);
-        // report.save()
-        //     .then(doc => {
-        //         res.send(doc)
-        //         console.log(doc)
-        //     })
-        //     .catch(err => console.log(err))
-
-
     } catch (err) {
         console.error("Error uploading file:", err);
         res.status(500).json({ error: "Image upload failed" });

@@ -1,3 +1,136 @@
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Functions to open and close a modal
+        function openModal($el) {
+            $el.classList.add('is-active');
+        }
+
+        function closeModal($el) {
+            $el.classList.remove('is-active');
+        }
+
+        function closeAllModals() {
+            (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+                closeModal($modal);
+            });
+        }
+
+        // Add a click event on buttons to open a specific modal
+        (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+            const modal = $trigger.dataset.target;
+            const $target = document.getElementById(modal);
+
+            $trigger.addEventListener('click', () => {
+                openModal($target);
+            });
+        });
+
+        // Add a click event on various child elements to close the parent modal
+        (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+            const $target = $close.closest('.modal');
+
+            $close.addEventListener('click', () => {
+                closeModal($target);
+            });
+        });
+
+        // Add a keyboard event to close all modals
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Escape') {
+                closeAllModals();
+            }
+        });
+    });
+</script>
+<div id="modal-js-example" class="modal">
+    <div class="modal-background"></div>
+
+    <div class="modal-content">
+        <div class="box">
+
+            <form action="/upload/report/" method="post" enctype="multipart/form-data" class="section">
+
+                <h1 class="title "> Upload New Report</h1>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" name="name" type="text" placeholder="Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Phone</label>
+                    <div class="control">
+                        <input class="input" name="phone" type="tel" placeholder=" Phone number">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Test Name</label>
+                    <div class="control">
+                        <input class="input" name="test" type="text" placeholder="Test Name">
+                    </div>
+                </div>
+
+
+                <div class="field">
+                    <label class="label">Test Description</label>
+                    <div class="control">
+                        <textarea class="textarea" name="description" placeholder="Textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Payment Status</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="paymentstatus">
+                                <option value="done">Select dropdown</option>
+                                <option value="done"> Done </option>
+                                <option value="not-done"> To be Done </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="file has-name is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="file" id="file" accept="*/*">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose a file…
+                                </span>
+                            </span>
+                            <span class="file-name">
+                                Screen Shot 2017-07-29 at 15.54.25.png
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button id="submit-button" type="submit" class="button is-link">Submit</button>
+                    </div>
+                    <div class="control">
+                        <button type="reset" class="button is-link is-light">Reset</button>
+                    </div>
+                    <div class="control">
+                        <a href="/reports/" class="button is-link is-danger">Cancel</a>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    <button class="modal-close is-large" aria-label="close"> </button>
+</div>
+
+
 <section class="hero is-primary">
     <div class="hero-body">
         <div class="container">
@@ -8,22 +141,26 @@
     </div>
 </section>
 
+
+
 <section class="section">
     <div class="container">
         <div class="columns">
 
-            <a href="/reports/add" id="add" class="column is-one-quarter">
+            <div id="add" class="js-modal-trigger  column is-one-quarter" data-target="modal-js-example">
                 <div class="box has-background-info has-text-white has-rounded-corners">
-                    <h3 class="has-text-white title is-5"> Add + </h3>
+                    <div class="has-text-white title is-5">
+                        Add +
+                    </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="/booking" class="column is-one-quarter">
+            <a href="/reports/all" class="column is-one-quarter">
                 <div class="box has-background-danger has-text-white has-rounded-corners">
                     <h3 class="has-text-white title is-5"> View All </h3>
                 </div>
             </a>
-            <a href="/appointments" class="column is-one-quarter">
+            <a href="/reports/history" class="column is-one-quarter">
                 <div class="box has-background-success has-text-white has-rounded-corners">
                     <h3 class="has-text-white title is-5"> History </h3>
                 </div>
@@ -32,6 +169,3 @@
         </div>
     </div>
 </section>
-
-
-

@@ -1,3 +1,24 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <title>Error Page</title>
+</head>
+
+<body>
+    <section class="hero is-fullheight is-danger is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title"> {{message}}</h1>
+                <h2 class="subtitle"> {{error.status}} </h2>
+                <a href="/" class="m-4 button is-light"> Ask Help </a>
+                <pre class="container">{{error.stack}}</pre>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
