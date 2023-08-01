@@ -14,7 +14,7 @@
             <div class="container has-text-centered">
                 <h1 class="title"> {{message}}</h1>
                 <h2 class="subtitle"> {{error.status}} </h2>
-                <a href="/" class="m-4 button is-light"> Ask Help </a>
+                <a href="/" id="current-page-button" class="m-4 button is-light"> Ask Help </a>
                 <pre class="container">{{error.stack}}</pre>
             </div>
         </div>
@@ -22,3 +22,14 @@
 </body>
 
 </html>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Get the current page URI
+      const currentPageURI = window.location.href;
+
+      // Set the current page URI as the href attribute of the button
+      const button = document.getElementById("current-page-button");
+      button.href = '/error/?url=' + currentPageURI;
+    });
+  </script>

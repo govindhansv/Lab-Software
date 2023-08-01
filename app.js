@@ -13,6 +13,8 @@ const hbs = require('express-handlebars');
 var db = require('./connection');
 
 
+
+
 // try {
   // db.connect();
 //   console.log("Database connected to port");
@@ -27,6 +29,7 @@ var indexRouter = require('./routes/index');
 var reportsRouter = require('./routes/reports');
 var uploadRouter = require('./routes/upload');
 var usersRouter = require('./routes/users');
+var errorRouter = require('./Errors/error');
 
 var app = express();
 
@@ -37,6 +40,7 @@ db.connect();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.engine('hbs', hbs.engine({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/', partialsDir: __dirname + '/views/partials/' }))
+
 
 
 app.use(logger('dev'));
@@ -62,6 +66,7 @@ app.use('/', indexRouter);
 app.use('/reports', reportsRouter);
 app.use('/upload', uploadRouter);
 app.use('/users', usersRouter);
+app.use('/error', errorRouter);
 
 
 // mongoose.set('strictQuery', true)
@@ -89,5 +94,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

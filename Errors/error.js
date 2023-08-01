@@ -1,7 +1,22 @@
+var express = require('express');
+var router = express.Router();
+
+//For error handling 
 const puppeteer = require('puppeteer');
-// const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+
+
+router.get('/', (req, res) => {
+    console.log(req.query.url);
+    captureScreenshotAndUpload(req.query.url);
+    res.redirect('/')
+})
+
+
+module.exports = router;
+
+
 
 async function captureScreenshotAndUpload(url) {
     try {
@@ -28,12 +43,13 @@ async function captureScreenshotAndUpload(url) {
 
         // Generate the file name with the current date and time
         const fileName = `screenshot_${formattedDate}.png`;
-        const folderName = 'Errors';
+        const folderName = 'screenshots';
         const folderPath = path.join(__dirname, folderName);
         if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath);
         }
 
+        
         // Save the screenshot data to a local file
         const filePath = path.join(folderPath, fileName);
         fs.writeFileSync(filePath, Buffer.from(screenshot, 'base64'));
@@ -44,5 +60,3 @@ async function captureScreenshotAndUpload(url) {
         console.error('Error capturing screenshot:', error);
     }
 }
-
-
