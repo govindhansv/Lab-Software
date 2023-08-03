@@ -15,19 +15,29 @@
             <table id="myTable" class="display">
                 <thead>
                     <tr>
-                        <th>Column 1</th>
-                        <th>Column 2</th>
+                        <th>Name </th>
+                        <th> Phone </th>
+                        <th> Test Name </th>
+                        <th>  Description </th>
+                        <th>Paid Status </th>
+                        <th> Report </th>
+                        <th> Edit </th>
+                        <th> Delete </th>
                     </tr>
                 </thead>
                 <tbody>
+                  {{#each data}}
                     <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
+                        <td>{{this.name}} </td>
+                        <td> {{this.phone}} </td>
+                        <td> {{this.test}} </td>
+                        <td> {{this.description}} </td>
+                        <td> {{this.paymentstatus}} </td>
+                        <td> <a target="_blank" href="{{this.report}}">View </a> </td>
+                        <td><a href="/reports/edit/{{this._id}}" class="button is-info">E</a></td>
+                        <td><a href="/reports/delete/{{this._id}}" class="button is-danger">D</a></td>
                     </tr>
-                    <tr>
-                        <td>Row 2 Data 1</td>
-                        <td>Row 2 Data 2</td>
-                    </tr>
+                    {{/each}}
                 </tbody>
             </table>
 

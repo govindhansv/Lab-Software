@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const db = require('../connection');
 // const errorhandler = require('../errorhandler');
 // const targetUrl = 'https://example.com';
@@ -13,13 +14,20 @@ const getAdd = async function (req, res) {
 
 const getEdit = async function (req, res) {
   let id = req.params.id;
-  let data = await db.get.collection('labreports').findOne({ _id: id });
+  let data = await db.get.collection('labreports').findOne({ _id: new ObjectId(id )  });
+
+  if (data.paymentstatus== 'done'  ) {
+    data.paymentstatus = true;
+  } else {
+    data.paymentstatus = false;
+  }
+  
   res.render('reports/edit', { data });
 }
 
 const getReportById = async function (req, res, next) {
   let id = req.params.id;
-  let data = await db.get.collection('labreports').findOne({ _id: id })
+  let data = await db.get.collection('labreports').findOne({ _id: new ObjectId(id )  })
   res.render('reports/single', { data });
 }
 
@@ -29,7 +37,12 @@ const getAllReports = async function (req, res, next) {
 }
 
 const deleteOne = async function (req, res, next) {
-  await db.get.collection('labreports').deleteOne({ _id: req.params.id });
+  try {
+     db.get.collection('labreports').deleteOne({ _id:new ObjectId(req.params.id ) });
+    res.redirect('/reports/all/')
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 exports.getReportPage = getReportPage;

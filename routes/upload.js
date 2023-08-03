@@ -5,6 +5,7 @@ const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
 const db = require('../connection');
+const { ObjectId } = require('mongodb');
 
 cloudinary.config({
     cloud_name: 'gbrozdev',
@@ -52,6 +53,41 @@ router.post("/report", upload.single("file"), async function (req, res, next) {
         console.error("Error uploading file:", err);
         res.status(500).json({ error: "Image upload failed" });
     }
+});
+
+router.post("/report/edit", upload.single("newfile"), async function (req, res, next) {
+
+    let data = req.body;
+    // Check if a file was uploaded successfully
+    if (req.file) {
+
+        // Access the link to the uploaded file
+        const fileUrl = req.file.path;
+        console.log(fileUrl);
+        data.report = fileUrl;
+        console.log(data);
+        
+    } 
+    console.log(data);
+
+
+    db.get.collection('labreports').updateOne({ _id: new ObjectId(data.id) }, {
+        $set: data
+    }).then(response => {
+        if (response.modifiedCount === 1) {
+            console.log('Document updated successfully!');
+            // Additional logic or rendering if needed
+            res.render('reports/single', { data })
+
+        } else {
+            console.log('No matching document found for the given ID.');
+        }
+    })
+        .catch(error => {
+            console.error('Error updating document:', error);
+
+        });
+
 });
 
 

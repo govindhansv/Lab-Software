@@ -1,0 +1,104 @@
+<form action="/upload/report/edit/" method="post" enctype="multipart/form-data" class="section">
+
+    <h1 class="title "> Update Report</h1>
+
+    <div class="card mb-4">
+
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img src="{{data.report}} " alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4"> {{data.name}} </p>
+                    <p class="subtitle is-6">{{data.test}} </p>
+                    <p class="subtitle is-6">Phone :- {{data.phone}} </p>
+                </div>
+            </div>
+
+            <div class="content">
+                {{data.description}} <a target="_blank" href="{{data.report}}"> View Report </a>.
+                <br>
+                {{!-- <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> --}}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+            <input class="input" name="name" value="{{data.name}}" type="text" placeholder="Name">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Phone</label>
+        <div class="control">
+            <input class="input" name="phone" value="{{data.phone}}" type="tel" placeholder=" Phone number">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Test Name</label>
+        <div class="control">
+            <input class="input" name="test" value="{{data.test}}" type="text" placeholder="Test Name">
+        </div>
+    </div>
+
+
+    <div class="field">
+        <label class="label">Test Description</label>
+        <div class="control">
+            <textarea class="textarea" name="description" value="{{data.description}}"
+                placeholder="Textarea"> {{data.description}} </textarea>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Payment Status</label>
+        <div class="control">
+            <div class="select">
+                <select name="paymentstatus">
+                    <option value="not-done" >Not Done</option>
+                    {{#if data.paymentstatus}}
+                    <option value="done" selected >Done</option>
+                    {{/if}}
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <img src="{{data.report}}" alt="">
+    <input type="text" hidden name="file" value="{{data.report}}">
+    <input type="text" hidden name="id" value="{{data._id}}">
+    <div class="field">
+        <div class="file has-name is-boxed">
+            <label class="file-label">
+                <input class="file-input" type="file" name="newfile" id="file" accept="*/*">
+                <span class="file-cta">
+                    <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                        Update file…
+                    </span>
+                </span>
+                <span class="file-name">
+                    Screen Shot 2017-07-29 at 15.54.25.png
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button id="submit-button" type="submit" class="button is-link">Submit</button>
+        </div>
+        <div class="control">
+            <button type="reset" class="button is-link is-light">Reset</button>
+        </div>
+        <div class="control">
+            <a href="/reports/all/" class="button is-link is-danger">Cancel</a>
+        </div>
+    </div>
+</form>
