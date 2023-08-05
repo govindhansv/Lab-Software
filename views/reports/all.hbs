@@ -20,6 +20,8 @@
                         <th> Test Name </th>
                         <th>  Description </th>
                         <th>Paid Status </th>
+                        <th> ID </th>
+                        <th> View </th>
                         <th> Report </th>
                         <th> Edit </th>
                         <th> Delete </th>
@@ -33,7 +35,9 @@
                         <td> {{this.test}} </td>
                         <td> {{this.description}} </td>
                         <td> {{this.paymentstatus}} </td>
-                        <td> <a target="_blank" href="{{this.report}}">View </a> </td>
+                        <td> {{this._id}} </td>
+                        <td> <a target="_blank" href="/reports/{{this._id}}">View </a> </td>
+                        <td> <a target="_blank" href="{{this.report}}">Download </a> </td>
                         <td><a href="/reports/edit/{{this._id}}" class="button is-info">E</a></td>
                         <td><a href="/reports/delete/{{this._id}}" class="button is-danger">D</a></td>
                     </tr>

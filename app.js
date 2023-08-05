@@ -30,6 +30,7 @@ var reportsRouter = require('./routes/reports');
 var uploadRouter = require('./routes/upload');
 var usersRouter = require('./routes/users');
 var errorRouter = require('./Errors/error');
+var authsRouter = require('./routes/auth-routes');
 
 var app = express();
 
@@ -67,6 +68,7 @@ app.use('/reports', reportsRouter);
 app.use('/upload', uploadRouter);
 app.use('/users', usersRouter);
 app.use('/error', errorRouter);
+app.use('/auths', authsRouter);
 
 
 // mongoose.set('strictQuery', true)

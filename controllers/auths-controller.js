@@ -3,9 +3,9 @@ const fun = require('../functions');
 
 const getSignup = async function(req, res) {
     if (req.session.loggedIN == false) {
-        res.render('forms/signup', { err: true })
+        res.render('auths/signup', { err: true })
     } else
-        res.render('forms/signup')
+        res.render('auths/signup')
 }
 
 const postSignup = async function(req, res) {
@@ -18,7 +18,7 @@ const postSignup = async function(req, res) {
             req.session.user = response
             console.log(response);
     // res.status(201).json([{ "id": response.insertedId }]);
-            res.redirect('/doctors/alldoctors/')
+            res.redirect('/users/')
         } else {
             req.session.loggedIN = false;
             res.redirect('/auths/signup')
@@ -29,16 +29,14 @@ const postSignup = async function(req, res) {
 const getSignin = async function(req, res) {
     console.log(req.session);
     if (req.session.loggedIN) {
-        res.redirect('/blogs/')
+        res.redirect('/users/')
     } else if (req.session.loggedIN == false) {
 
-        res.render('forms/signin', { err: true });
+        res.render('auths/signin', { err: true });
     } else {
-        res.render('forms/signin');
+        res.render('auths/signin');
 
     }
-
-
 }
 
 const postSignin = async function(req, res) {
@@ -46,7 +44,7 @@ const postSignin = async function(req, res) {
         if (response.loginstatus) {
             response.loggedIN = true
             req.session.user = response
-            res.redirect('/doctors/alldoctors/')
+            res.redirect('/users/')
         } else {
             req.session.loggedIN = false;
             res.redirect('/auths/signin/')
