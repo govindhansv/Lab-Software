@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<!-- Example: Use the latest version from a CDN (Content Delivery Network) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+<section class="section">
+    <div class="container">
+        <div class="is-flex is-justify-content-center is-align-items-center">
+
+            <table id="myTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Name </th>
+                        <th> Phone </th>
+                        <th> Test Name </th>
+                        <th>  Description </th>
+                        <th>Paid Status </th>
+                        <th> ID </th>
+                        <th> View </th>
+                        <th> Report </th>
+                        {{!-- 
+                        <th> Edit </th>
+                        <th> Delete </th> --}}
+                    </tr>
+                </thead>
+                <tbody>
+                  {{#each data}}
+                    <tr>
+                        <td>{{this.name}} </td>
+                        <td> {{this.phone}} </td>
+                        <td> {{this.test}} </td>
+                        <td> {{this.description}} </td>
+                        <td> {{this.paymentstatus}} </td>
+                        <td> {{this._id}} </td>
+                        <td> <a target="_blank" href="/reports/{{this._id}}">View </a> </td>
+                         <td> <a target="_blank" href="{{this.report}}">Download </a> </td>
+                        {{!--
+                        <td><a href="/reports/edit/{{this._id}}" class="button is-info">E</a></td>
+                        <td><a href="/reports/delete/{{this._id}}" class="button is-danger">D</a></td> --}}
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</section>

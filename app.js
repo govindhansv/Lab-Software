@@ -31,6 +31,7 @@ var uploadRouter = require('./routes/upload');
 var usersRouter = require('./routes/users');
 var errorRouter = require('./Errors/error');
 var authsRouter = require('./routes/auth-routes');
+var messagesRouter = require('./routes/messages');
 
 var app = express();
 
@@ -69,6 +70,7 @@ app.use('/upload', uploadRouter);
 app.use('/users', usersRouter);
 app.use('/error', errorRouter);
 app.use('/auths', authsRouter);
+app.use('/messages', messagesRouter);
 
 
 // mongoose.set('strictQuery', true)
