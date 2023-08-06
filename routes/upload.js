@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const fun = require('../functions');
 
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
@@ -8,9 +9,9 @@ const db = require('../connection');
 const { ObjectId } = require('mongodb');
 
 cloudinary.config({
-    cloud_name: 'gbrozdev',
-    api_key: '844918411198732',
-    api_secret: '-Tyjb9TAHur7ZYQeALhAhn5JBY4'
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret
 });
 
 const storage = new CloudinaryStorage({
@@ -46,6 +47,11 @@ router.post("/report", upload.single("file"), async function (req, res, next) {
         data.report = fileUrl;
         console.log(data);
         db.get.collection('labreports').insertOne(data).then(response => {
+            let msgobj = {
+                msg: fileUrl,
+                phone: 'whatsapp:+91' + data.phone
+            }
+            fun.SendWhtspSMS(msgobj)
             res.render('reports/single', { data })
         })
             .catch(err => console.log(err));
@@ -66,8 +72,8 @@ router.post("/report/edit", upload.single("newfile"), async function (req, res, 
         console.log(fileUrl);
         data.report = fileUrl;
         console.log(data);
-        
-    } 
+
+    }
     console.log(data);
 
 

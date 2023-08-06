@@ -2,11 +2,14 @@ const bcrypt = require('bcrypt')
 var db = require('./connection')
 // var ObjectId = require('mongodb').ObjectId
 // const Razorpay = require('razorpay');
-
+const accountSid = process.env.accountSid;
+const authToken = process.env.authToken;
+// const authToken = '[AuthToken]';
+const client = require('twilio')(accountSid, authToken);
 
 module.exports = {
     doSignup: (userdata) => {
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let user = await db.get.collection('users').findOne({ gmail: userdata.gmail })
             if (user) {
                 let response = {}
@@ -26,7 +29,7 @@ module.exports = {
         })
     },
     doLogin: (userdata) => {
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let user = await db.get.collection('users').findOne({ gmail: userdata.gmail })
 
             let response = {}
@@ -51,6 +54,24 @@ module.exports = {
         })
     },
 
+    SendWhtspSMS: (message) => {
+        try {
+            client.messages
+                .create({
+                    from: 'whatsapp:+14155238886',
+                    body: message.msg,
+                    to: message.phone
+                })
+                .then(msg => {
+                    console.log(msg);
+
+                    return msg;
+                });
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
     // AdoSignup: (userdata) => {
     //     return new Promise(async(resolve, reject) => {
     //         let user = await db.get().collection('doctors').findOne({ gmail: userdata.gmail })
