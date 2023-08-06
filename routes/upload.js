@@ -48,7 +48,7 @@ router.post("/report", upload.single("file"), async function (req, res, next) {
         console.log(data);
         db.get.collection('labreports').insertOne(data).then(response => {
             let msgobj = {
-                msg: fileUrl,
+                msg: `Hey ${data.name} Your ${data.test} result is ready. \n Details : \n ${data.description} \n ${data.phone}  \n ${data.paymentstatus}  \n \n Here the Url \n \n ${fileUrl} `,
                 phone: 'whatsapp:+91' + data.phone
             }
             fun.SendWhtspSMS(msgobj)
