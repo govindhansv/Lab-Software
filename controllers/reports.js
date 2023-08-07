@@ -5,7 +5,9 @@ const db = require('../connection');
 
 const getReportPage = async function (req, res) {
   // errorhandler.captureScreenshotAndUpload('https://pptr.dev/');
-  res.render('reports/index');
+  let users = await db.get.collection('users').find({}).toArray();
+  console.log(users);
+  res.render('reports/index',{users});
 }
 
 const getAdd = async function (req, res) {

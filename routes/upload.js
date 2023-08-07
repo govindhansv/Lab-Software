@@ -41,20 +41,30 @@ router.post("/report", upload.single("file"), async function (req, res, next) {
             return res.status(400).json({ error: "No file uploaded" });
         }
         // Access the link to the uploaded file
+
+
         const fileUrl = req.file.path;
         console.log(fileUrl);
         let data = req.body;
+
         data.report = fileUrl;
         console.log(data);
         db.get.collection('labreports').insertOne(data).then(response => {
             let msgobj = {
-                msg: `Hey ${data.name} Your ${data.test} result is ready. \n Details : \n ${data.description} \n ${data.phone}  \n ${data.paymentstatus}  \n \n Here the Url \n \n ${fileUrl} `,
+                msg: `Hey ${data.name} Your ${data.test} result is ready. \n Details : \n ${data.description} \n Phone :  ${data.phone}  \n Payment Status : ${data.paymentstatus}  \n \n Here the Url \n \n ${fileUrl} `,
                 phone: 'whatsapp:+91' + data.phone
             }
             fun.SendWhtspSMS(msgobj)
             res.render('reports/single', { data })
         })
             .catch(err => console.log(err));
+
+        let user = {
+            "name": data.name,
+            "phone": data.phone
+        }
+        db.get.collection('users').insertOne(user);
+
     } catch (err) {
         console.error("Error uploading file:", err);
         res.status(500).json({ error: "Image upload failed" });

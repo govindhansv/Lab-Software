@@ -33,6 +33,8 @@ var errorRouter = require('./Errors/error');
 var authsRouter = require('./routes/auth-routes');
 var messagesRouter = require('./routes/messages');
 
+var devRouter = require('./routes/dev');
+
 var app = express();
 
 db.connect();
@@ -71,6 +73,8 @@ app.use('/users', usersRouter);
 app.use('/error', errorRouter);
 app.use('/auths', authsRouter);
 app.use('/messages', messagesRouter);
+
+app.use('/dev', devRouter);
 
 
 // mongoose.set('strictQuery', true)
