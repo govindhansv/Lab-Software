@@ -64,6 +64,12 @@ app.use(sessions({
   resave: false
 }));
 
+// Use this for Allow Cors and use this as an API
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 
 
 app.use('/', indexRouter);
