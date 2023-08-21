@@ -1,0 +1,147 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<!-- Example: Use the latest version from a CDN (Content Delivery Network) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+
+<style>
+    .popup-form {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<section class="section">
+    <div class="container">
+
+        <h1 class="text-center">Admin Panel </h1>
+
+        <button class="btn btn-success " onclick="openForm()"> Add </button>
+        <button class="btn btn-success " onclick="openForm()"> Add </button>
+        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="https://icons.getbootstrap.com/assets/img/icons-hero.png" height="32" width="32"
+                    class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+            <div class="card" aria-hidden="true">
+                <div class="card-body">
+                    <h5 class="card-title placeholder-glow">
+                        <span class="placeholder col-6"></span>
+                    </h5>
+                    <p class="card-text placeholder-glow">
+                        <span class="placeholder col-7"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-6"></span>
+                        <span class="placeholder col-8"></span>
+                    </p>
+                    <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>Name </th>
+                <th> Phone </th>
+                <th> Test Name </th>
+                <th> Edit </th>
+                <th> Delete </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>Scanning </td>
+                <td> 5000 </td>
+                <td> 2 days </td>
+                <td><a href="/reports/edit/{{this._id}}" class="button is-info">E</a></td>
+                <td><a href="/reports/delete/{{this._id}}" class="button is-danger">D</a></td>
+            </tr>
+            <tr>
+                <td>Diebetes </td>
+                <td> 6000 </td>
+                <td> 3 days </td>
+                <td><a href="/reports/edit/{{this._id}}" class="button is-info">E</a></td>
+                <td><a href="/reports/delete/{{this._id}}" class="button is-danger">D</a></td>
+            </tr>
+
+            {{!-- {{#each data}}
+            <tr>
+                <td>{{this.name}} </td>
+                <td> {{this.phone}} </td>
+                <td> {{this.test}} </td>
+                <td> {{this.description}} </td>
+                <td> {{this.paymentstatus}} </td>
+                <td> {{this._id}} </td>
+                <td> <a target="_blank" href="/reports/{{this._id}}">View </a> </td>
+                <td> <a target="_blank" href="{{this.report}}">Download </a> </td>
+                <td><a href="/reports/edit/{{this._id}}" class="button is-info">E</a></td>
+                <td><a href="/reports/delete/{{this._id}}" class="button is-danger">D</a></td>
+            </tr>
+            {{/each}} --}}
+        </tbody>
+    </table>
+
+</section>
+
+<div class="popup-form" id="popupForm">
+    <h2 id="formTitle"> Add Test </h2>
+    <form>
+        <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input type="text" class="form-control" id="itemName" placeholder="Enter item name">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" class="btn btn-secondary" id="closeButton" onclick="closeForm()">Close</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+<script>
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+
+    if (toastTrigger) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show()
+        })
+    }
+
+    function openForm() {
+        const popupForm = document.getElementById('popupForm');
+        popupForm.style.display = 'block';
+    }
+
+    function closeForm() {
+        const popupForm = document.getElementById('popupForm');
+        popupForm.style.display = 'none';
+    }
+</script>

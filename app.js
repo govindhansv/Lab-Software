@@ -14,7 +14,6 @@ var db = require('./connection');
 
 
 
-
 // try {
   // db.connect();
 //   console.log("Database connected to port");
@@ -32,6 +31,7 @@ var usersRouter = require('./routes/users');
 var errorRouter = require('./Errors/error');
 var authsRouter = require('./routes/auth-routes');
 var messagesRouter = require('./routes/messages');
+var adminRouter = require('./routes/admin-panel');
 
 var devRouter = require('./routes/dev');
 
@@ -64,6 +64,7 @@ app.use(sessions({
   resave: false
 }));
 
+
 // Use this for Allow Cors and use this as an API
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
@@ -79,6 +80,7 @@ app.use('/users', usersRouter);
 app.use('/error', errorRouter);
 app.use('/auths', authsRouter);
 app.use('/messages', messagesRouter);
+app.use('/admin-panel', adminRouter);
 
 app.use('/dev', devRouter);
 
